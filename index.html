@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الصفحة الثانية - الصورة الخاصة</title>
+    <title>الصفحة الأولى - خمسة أسماء</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -21,114 +21,82 @@
             padding: 20px;
         }
 
-        .card {
-            background: white;
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 40px;
             padding: 2rem;
-            max-width: 800px;
-            width: 100%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             text-align: center;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
         }
 
-        h2 {
-            color: #764ba2;
-            font-size: 1.8rem;
+        h1 {
+            font-size: 2rem;
+            color: #333;
             margin-bottom: 0.5rem;
         }
 
-        .image-container {
-            margin: 1.5rem 0;
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        .sub {
+            color: #764ba2;
+            margin-bottom: 2rem;
+            font-weight: bold;
         }
 
-        img {
-            width: 100%;
-            max-height: 450px;
-            object-fit: cover;
+        .names-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .name-link {
             display: block;
-        }
-
-        .caption {
-            font-size: 1.2rem;
-            color: #555;
-            margin: 1rem 0;
-            font-weight: bold;
-        }
-
-        .back-link {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            text-decoration: none;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-weight: bold;
-            margin-top: 1rem;
-            transition: 0.3s;
-        }
-
-        .back-link:hover {
-            background: #764ba2;
-            transform: translateY(-2px);
-        }
-
-        .error {
-            color: red;
-            background: #ffe0e0;
+            background: linear-gradient(145deg, #f8f9ff, #e9ecef);
             padding: 1rem;
-            border-radius: 20px;
-            margin: 1rem 0;
+            border-radius: 60px;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #4a4a8a;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: 1px solid #ddd;
+        }
+
+        .name-link:hover {
+            transform: translateX(10px);
+            background: #e0e7ff;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-color: #764ba2;
+        }
+
+        .emoji {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #888;
         }
     </style>
 </head>
 <body>
-<div class="card" id="contentCard">
-    <h2>📸 الصورة الخاصة</h2>
-    <div id="imageArea">
-        <!-- سيتم عرض الصورة والاسم هنا ديناميكياً -->
+<div class="container">
+    <div class="emoji">🌟</div>
+    <h1>اختر اسماً لترى صورته</h1>
+    <div class="sub">⬇️ اضغط على أي اسم من الخمسة ⬇️</div>
+
+    <div class="names-list">
+        <!-- كل رابط يؤدي إلى page2.html مع معامل name -->
+        <a href="page2.html?name=remas" class="name-link">🌸 ريماس المطيري</a>
+    
     </div>
-    <a href="page1.html" class="back-link">🔙 العودة إلى قائمة الأسماء</a>
+
+    <footer>✅ الصفحة الأولى تحتوي على  أسماء،  الاسم ينقلك للصفحة الثانية ليعرض صورتك الخاصة</footer>
 </div>
-
-<script>
-    // الحصول على معامل name من الرابط
-    const urlParams = new URLSearchParams(window.location.search);
-    const nameParam = urlParams.get('name');
-
-    // تعريف الصور لكل اسم (يمكنك تغيير الروابط بأي صور تفضلينها)
-    const imagesData = {
-        remas: {
-            name: 'ريماس المطيري',
-            imgUrl: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=800',
-            alt: 'صورة ريماس'
-        },
-        
-    };
-
-    const imageArea = document.getElementById('imageArea');
-
-    if (nameParam && imagesData[nameParam]) {
-        const data = imagesData[nameParam];
-        // عرض الصورة والاسم الخاص به
-        imageArea.innerHTML = `
-            <div class="image-container">
-                <img src="${data.imgUrl}" alt="${data.alt}">
-            </div>
-            <div class="caption">✨ هذه الصورة خاصة بـ ${data.name} ✨</div>
-        `;
-        // تغيير عنوان الصفحة قليلاً
-        document.title = `صورة ${data.name}`;
-    } else {
-        // إذا لم يتم تمرير اسم صحيح أو لا يوجد اسم
-        imageArea.innerHTML = `
-            <div class="error">
-                ⚠️ لم يتم تحديد اسم صحيح. الرجاء العودة واختيار اسم من القائمة.
-            </div>
-        `;
-    }
-</script>
 </body>
 </html>

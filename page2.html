@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصفحة الثانية - الصورة الخاصة</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 40px;
+            padding: 2rem;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            color: #764ba2;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .image-container {
+            margin: 1.5rem 0;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        img {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .caption {
+            font-size: 1.2rem;
+            color: #555;
+            margin: 1rem 0;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .error {
+            color: red;
+            background: #ffe0e0;
+            padding: 1rem;
+            border-radius: 20px;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+<div class="card" id="contentCard">
+    <h2>📸 الصورة الخاصة</h2>
+    <div id="imageArea">
+        <!-- سيتم عرض الصورة والاسم هنا ديناميكياً -->
+    </div>
+    <a href="page1.html" class="back-link">🔙 العودة إلى قائمة الأسماء</a>
+</div>
+
+<script>
+    // الحصول على معامل name من الرابط
+    const urlParams = new URLSearchParams(window.location.search);
+    const nameParam = urlParams.get('name');
+
+    // تعريف الصور لكل اسم (يمكنك تغيير الروابط بأي صور تفضلينها)
+    const imagesData = {
+        remas: {
+            name: 'ريماس المطيري',
+            imgUrl: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=800',
+            alt: 'صورة ريماس'
+        },
+        
+    };
+
+    const imageArea = document.getElementById('imageArea');
+
+    if (nameParam && imagesData[nameParam]) {
+        const data = imagesData[nameParam];
+        // عرض الصورة والاسم الخاص به
+        imageArea.innerHTML = `
+            <div class="image-container">
+                <img src="${data.imgUrl}" alt="${data.alt}">
+            </div>
+            <div class="caption">✨ هذه الصورة خاصة بـ ${data.name} ✨</div>
+        `;
+        // تغيير عنوان الصفحة قليلاً
+        document.title = `صورة ${data.name}`;
+    } else {
+        // إذا لم يتم تمرير اسم صحيح أو لا يوجد اسم
+        imageArea.innerHTML = `
+            <div class="error">
+                ⚠️ لم يتم تحديد اسم صحيح. الرجاء العودة واختيار اسم من القائمة.
+            </div>
+        `;
+    }
+</script>
+</body>
+</html>
